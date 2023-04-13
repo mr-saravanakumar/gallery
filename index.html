@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color:grey;
+    }
+    .container .img
+    {
+        width:200px;
+        height:200px;
+    }
+    .container{
+        position: absolute;
+        left:500px;
+        top:200px;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap:5px;
+    }
+    .img{
+       background-color:white;
+       padding:5px;
+       object-fit: cover;
+       cursor: pointer;
+    }
+    #model{
+        position:fixed;
+        top:0;
+        width:100%; 
+        height:100%;
+        backdrop-filter: blur(6px) ;
+        display: none;
+    }
+    #model.active{
+        display: block;
+    }
+    #lodimg{
+        width:300px;
+        height:300px;
+        position: absolute;
+        left:650px;
+        top:250px;
+        border:5px solid white;
+        object-fit: cover;
+    }
+</style>
+<body>  
+  <div class="container">
+    <img src="106592.jpg"       class="img">
+    <img src="2566549 (1).jpg"  class="img">
+    <img src="2960031.jpg"       class="img">
+    <img src="images (40).jpeg"  class="img">
+    <img src="images (46).jpeg"  class="img">
+    <img src="images (42).jpeg"  class="img">
+  </div>
+  <script>
+    const model=document.createElement('div');
+    model.id='model';
+    document.body.appendChild(model);
+    const img=document.querySelectorAll(".img");
+    img.forEach(image=>{
+      image.addEventListener("click",()=>{
+        model.classList.add('active');
+        const lodimg=document.createElement('img');
+        lodimg.id='lodimg';
+        lodimg.src=image.src;
+        if(model.firstChild){
+            model.removeChild(model.firstChild);
+        }
+        model.append(lodimg);    
+      });
+    });
+    model.addEventListener('click',()=>{
+      model.classList.remove('active');
+    });
+  </script>
+</html>
